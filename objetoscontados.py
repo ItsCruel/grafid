@@ -1,55 +1,64 @@
-
 import cv2
 import numpy as np
 
+# Cargar la imagen
 imagen = cv2.imread('thx.png', 1)
 
-# Convertir la imagen de RGB a HSV
+# RGB a HSV
 imagen_hsv = cv2.cvtColor(imagen, cv2.COLOR_BGR2HSV)
 
-# Definir el rango de color rojo en HSV
+# Rojo
 bajo_rojo1 = np.array([0, 40, 40])
 alto_rojo1 = np.array([10, 255, 255])
 bajo_rojo2 = np.array([160, 40, 40])
 alto_rojo2 = np.array([180, 255, 255])
 
-# Crear una máscara para el color rojo
+# Verde
+bajo_verde = np.array([35, 40, 40])
+alto_verde = np.array([85, 255, 255])
+
+# Azul
+bajo_azul = np.array([90, 40, 40])
+alto_azul = np.array([130, 255, 255])
+
+# Amarillo
+bajo_amarillo = np.array([25, 40, 40])
+alto_amarillo = np.array([35, 255, 255])
+
+# Naranja
+bajo_naranja = np.array([10, 40, 40])
+alto_naranja = np.array([25, 255, 255])
+
+# Crear de cada color
 mascara_rojo1 = cv2.inRange(imagen_hsv, bajo_rojo1, alto_rojo1)
 mascara_rojo2 = cv2.inRange(imagen_hsv, bajo_rojo2, alto_rojo2)
 mascara_rojo = cv2.add(mascara_rojo1, mascara_rojo2)
 
-# Convertir la imagen original a escala de grises
-imagen_gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
+mascara_verde = cv2.inRange(imagen_hsv, bajo_verde, alto_verde)
+mascara_azul = cv2.inRange(imagen_hsv, bajo_azul, alto_azul)
+mascara_amarillo = cv2.inRange(imagen_hsv, bajo_amarillo, alto_amarillo)
+mascara_naranja = cv2.inRange(imagen_hsv, bajo_naranja, alto_naranja)
 
-# Convertir la imagen gris a un formato BGR para que coincida con la original
-imagen_gris_bgr = cv2.cvtColor(imagen_gris, cv2.COLOR_GRAY2BGR)
+# Contar los objetos en cada masca
+def contar_objetos(mascara):
+    contornos, _ = cv2.findContours(mascara, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    return len(contornos)
 
-# Combinar la imagen en gris con las áreas en rojo
-resultado = np.where(mascara_rojo[:, :, None] == 255, imagen, imagen_gris_bgr)
+# contador de objetos 
+objetos_rojos = contar_objetos(mascara_rojo)
+objetos_verdes = contar_objetos(mascara_verde)
+objetos_azules = contar_objetos(mascara_azul)
+objetos_amarillos = contar_objetos(mascara_amarillo)
+objetos_naranjas = contar_objetos(mascara_naranja)
 
-# Mostrar la imagen final
-cv2.imshow('Color resaltado', resultado)
-
-# Definir el rango de color rojo en HSV
-bajo_Azul1 = np.array([90, 40, 90])
-alto_Azul1 = np.array([130, 255, 255])
-
-# Crear una máscara para el color rojo
-mascara_azul11 = cv2.inRange(imagen_hsv, bajo_Azul1, alto_Azul1)
-mascara_azul = cv2.add(mascara_azul11)
-
-# Convertir la imagen original a escala de grises
-imagen_gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
-
-# Convertir la imagen gris a un formato BGR para que coincida con la original
-imagen_gris_bgr = cv2.cvtColor(imagen_gris, cv2.COLOR_GRAY2BGR)
-
-# Combinar la imagen en gris con las áreas en rojo
-resultado1 = np.where(mascara_azul[:, :, None] == 255, imagen, imagen_gris_bgr)
-
-# Mostrar la imagen final
-cv2.imshow('Color resaltado1', resultado1)
+# Imprimir resultados
+print(f"Objetos rojos: {objetos_rojos}")
+print(f"Objetos verdes: {objetos_verdes}")
+print(f"Objetos azules: {objetos_azules}")
+print(f"Objetos amarillos: {objetos_amarillos}")
+print(f"Objetos naranjas: {objetos_naranjas}")
 
 
+cv2.imshow('Objetos Rojos ', resultado)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
