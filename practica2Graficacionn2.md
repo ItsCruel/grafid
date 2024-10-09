@@ -3,7 +3,7 @@
 ***Instrucciones***
 Generar al menos cinco operadores puntuales utilizando la imagen generada o una imagen previamente cargada.
 
-**descripción***
+****descripción****
 Este código  se usa para realizar diversas transformaciones sobre una imagen, como escala de grises, umbralización, inversión de colores, ajuste de brillo y ajuste de contraste. 
 
 Estas líneas importan las bibliotecas Opencv y numpy:
