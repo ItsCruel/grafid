@@ -1,4 +1,4 @@
-**Practica 2**
+*Practica 2*
 
 ***Instrucciones***
 Generar al menos cinco operadores puntuales utilizando la imagen generada o una imagen previamente cargada.
