@@ -1,9 +1,9 @@
-#Practica 2
+**Practica 2**
 
-##Instrucciones
+***Instrucciones***
 Generar al menos cinco operadores puntuales utilizando la imagen generada o una imagen previamente cargada.
 
-##descripción
+**descripción***
 Este código  se usa para realizar diversas transformaciones sobre una imagen, como escala de grises, umbralización, inversión de colores, ajuste de brillo y ajuste de contraste. 
 
 Estas líneas importan las bibliotecas Opencv y numpy:
@@ -62,6 +62,7 @@ cv2.imshow('Contraste Aumentado', imagen_contraste)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+*****mostrando resultados****
 - 'Imagen Original': Muestra la imagen original.
 
 - 'Escala de Grises': Muestra la versión en escala de grises.
